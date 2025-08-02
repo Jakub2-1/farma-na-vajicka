@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Plynulé scrollování na sekce
+    // Plynulé scrollování na sekce (s Safari fallback)
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -26,13 +26,44 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (targetSection) {
                 const offsetTop = targetSection.offsetTop - 80; // 80px pro fixní navigaci
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+                
+                // Kontrola podpory smooth scrolling
+                if ('scrollBehavior' in document.documentElement.style) {
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // Fallback pro Safari - animované scrollování
+                    smoothScrollTo(offsetTop, 600);
+                }
             }
         });
     });
+
+    // Funkce pro smooth scrolling fallback
+    function smoothScrollTo(targetPosition, duration) {
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = ease(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        function ease(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        requestAnimationFrame(animation);
+    }
 
     // Tlačítko "Předobjednat" v hero sekci
     const heroButton = document.querySelector('.hero .btn-primary');
@@ -42,10 +73,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const ordersSection = document.querySelector('#orders');
             if (ordersSection) {
                 const offsetTop = ordersSection.offsetTop - 80;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+                
+                if ('scrollBehavior' in document.documentElement.style) {
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    smoothScrollTo(offsetTop, 600);
+                }
             }
         });
     }
@@ -62,26 +98,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Intersection Observer pro fade-in animace
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // Intersection Observer pro fade-in animace (s Safari fallback)
+    if ('IntersectionObserver' in window) {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Přidání fade-in třídy k elementům a pozorování
+        const fadeElements = document.querySelectorAll('section, .benefit-item, .breed-item, .price-item, .contact-item');
+        fadeElements.forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
         });
-    }, observerOptions);
-
-    // Přidání fade-in třídy k elementům a pozorování
-    const fadeElements = document.querySelectorAll('section, .benefit-item, .breed-item, .price-item, .contact-item');
-    fadeElements.forEach(el => {
-        el.classList.add('fade-in');
-        observer.observe(el);
-    });
+    } else {
+        // Fallback pro starší Safari
+        const fadeElements = document.querySelectorAll('section, .benefit-item, .breed-item, .price-item, .contact-item');
+        fadeElements.forEach(el => {
+            el.classList.add('fade-in', 'visible');
+        });
+    }
 
     // Zvýraznění aktivní sekce v navigaci
     const sections = document.querySelectorAll('section[id]');
