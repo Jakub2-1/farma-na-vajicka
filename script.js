@@ -1,4 +1,4 @@
-// Plynulé scrollování a fixní navigace
+// Moderní JavaScript pro luxusní web farmy
 document.addEventListener('DOMContentLoaded', function() {
     // Hamburger menu
     const hamburger = document.getElementById('hamburger');
@@ -17,16 +17,70 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Plynulé scrollování na sekce
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const offsetTop = targetSection.offsetTop - 80; // 80px pro fixní navigaci
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Tlačítko "Předobjednat" v hero sekci
+    const heroButton = document.querySelector('.hero .btn-primary');
+    if (heroButton) {
+        heroButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const ordersSection = document.querySelector('#orders');
+            if (ordersSection) {
+                const offsetTop = ordersSection.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+
     // Změna stylu navigace při scrollu
     window.addEventListener('scroll', function() {
         const navbar = document.getElementById('navbar');
         if (window.scrollY > 50) {
             navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            navbar.style.boxShadow = '0 4px 25px rgba(47, 79, 79, 0.15)';
         } else {
             navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            navbar.style.boxShadow = '0 2px 20px rgba(47, 79, 79, 0.1)';
         }
+    });
+
+    // Intersection Observer pro fade-in animace
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Přidání fade-in třídy k elementům a pozorování
+    const fadeElements = document.querySelectorAll('section, .benefit-item, .breed-item, .price-item, .contact-item');
+    fadeElements.forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
     });
 
     // Zvýraznění aktivní sekce v navigaci
@@ -54,299 +108,144 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Formulář objednávky
     const orderForm = document.getElementById('orderForm');
-    
     if (orderForm) {
         orderForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Získání dat z formuláře
-            const formData = new FormData(this);
-            const orderData = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                quantity: formData.get('quantity'),
-                pickup: formData.get('pickup'),
-                note: formData.get('note')
-            };
+            // Základní validace
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const quantity = document.getElementById('quantity').value;
+            const pickup = document.getElementById('pickup').value;
 
-            // Kontrola vyplnění povinných polí
-            if (!orderData.name || !orderData.email || !orderData.phone || !orderData.quantity || !orderData.pickup) {
-                showMessage('Prosím vyplňte všechna povinná pole.', 'error');
+            // Validace povinných polí
+            if (!name || !email || !phone || !quantity || !pickup) {
+                alert('Prosím vyplňte všechna povinná pole.');
                 return;
             }
 
-            // Simulace odeslání objednávky
-            showMessage('Děkujeme za objednávku! Brzy vás budeme kontaktovat.', 'success');
+            // Validace emailu
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Prosím zadejte platnou e-mailovou adresu.');
+                return;
+            }
+
+            // Validace telefonu (základní)
+            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{9,}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('Prosím zadejte platné telefonní číslo.');
+                return;
+            }
+
+            // Zobrazení zprávy o úspěchu
+            showSuccessMessage();
             
-            // Vyčištění formuláře
-            this.reset();
-            
-            // Zde by bylo skutečné odeslání dat na server
-            console.log('Objednávka odeslána:', orderData);
+            // Reset formuláře
+            orderForm.reset();
         });
     }
 
-    // Funkce pro zobrazení zpráv
-    function showMessage(message, type) {
-        // Odstranění existující zprávy
-        const existingMessage = document.querySelector('.form-message');
+    // Funkce pro zobrazení zprávy o úspěchu
+    function showSuccessMessage() {
+        // Odstraň existující zprávu pokud existuje
+        const existingMessage = document.querySelector('.success-message');
         if (existingMessage) {
             existingMessage.remove();
         }
 
-        // Vytvoření nové zprávy
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `form-message ${type}`;
-        messageDiv.innerHTML = `
-            <p>${message}</p>
-            <button class="close-message" onclick="this.parentElement.remove()">×</button>
+        // Vytvoř novou zprávu
+        const successMessage = document.createElement('div');
+        successMessage.className = 'success-message';
+        successMessage.innerHTML = `
+            <strong>Děkujeme za objednávku!</strong><br>
+            Brzy vás budeme kontaktovat ohledně převzetí vajec.
         `;
 
-        // Přidání stylů pro zprávy
-        if (!document.querySelector('#message-styles')) {
-            const styles = document.createElement('style');
-            styles.id = 'message-styles';
-            styles.textContent = `
-                .form-message {
-                    position: fixed;
-                    top: 100px;
-                    right: 20px;
-                    padding: 1rem 2rem;
-                    border-radius: 8px;
-                    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-                    z-index: 1001;
-                    max-width: 400px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    animation: slideIn 0.3s ease;
-                }
-                
-                .form-message.success {
-                    background: #d4edda;
-                    border: 1px solid #c3e6cb;
-                    color: #155724;
-                }
-                
-                .form-message.error {
-                    background: #f8d7da;
-                    border: 1px solid #f5c6cb;
-                    color: #721c24;
-                }
-                
-                .form-message p {
-                    margin: 0;
-                    flex: 1;
-                }
-                
-                .close-message {
-                    background: none;
-                    border: none;
-                    font-size: 1.5rem;
-                    cursor: pointer;
-                    margin-left: 1rem;
-                    opacity: 0.7;
-                    transition: opacity 0.3s ease;
-                }
-                
-                .close-message:hover {
-                    opacity: 1;
-                }
-                
-                @keyframes slideIn {
-                    from {
-                        transform: translateX(100%);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translateX(0);
-                        opacity: 1;
-                    }
-                }
-                
-                @media (max-width: 768px) {
-                    .form-message {
-                        right: 10px;
-                        left: 10px;
-                        max-width: none;
-                    }
-                }
-            `;
-            document.head.appendChild(styles);
-        }
+        // Vlož zprávu před formulář
+        const formContainer = document.querySelector('.order-form-container');
+        formContainer.insertBefore(successMessage, formContainer.firstChild);
 
-        // Přidání zprávy do DOM
-        document.body.appendChild(messageDiv);
-
-        // Automatické odstranění po 5 sekundách
+        // Zobraz zprávu s animací
         setTimeout(() => {
-            if (messageDiv.parentElement) {
-                messageDiv.remove();
-            }
+            successMessage.classList.add('show');
+        }, 100);
+
+        // Skryj zprávu po 5 sekundách
+        setTimeout(() => {
+            successMessage.classList.remove('show');
+            setTimeout(() => {
+                if (successMessage.parentNode) {
+                    successMessage.remove();
+                }
+            }, 500);
         }, 5000);
     }
 
-    // Animace při scrollování
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+    // Animace tlačítek při načtení stránky
+    setTimeout(() => {
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.style.opacity = '1';
+            btn.style.transform = 'translateY(0)';
+        });
+    }, 500);
+
+    // Parallax efekt pro hero sekci (jemný)
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero && scrolled < hero.offsetHeight) {
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        }
+    });
+
+    // Hover efekty pro karty
+    const cards = document.querySelectorAll('.benefit-item, .breed-item, .price-item');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // Počítadlo pro animaci čísel (pokud by bylo potřeba)
+    function animateNumbers() {
+        const numbers = document.querySelectorAll('.price-amount');
+        numbers.forEach(number => {
+            const target = parseInt(number.textContent.replace(/\D/g, ''));
+            let current = 0;
+            const increment = target / 20;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                number.textContent = Math.floor(current) + ' Kč';
+            }, 50);
+        });
+    }
+
+    // Kontrola viditelnosti pro spuštění animací
+    const checkVisibility = () => {
+        const priceSection = document.querySelector('.price-section');
+        if (priceSection) {
+            const rect = priceSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                // animateNumbers(); // Odkomentuj pokud chceš animované číslice
+            }
+        }
     };
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Přidání animací k sekcím
-    const animatedElements = document.querySelectorAll('.benefit-item, .breed-item, .price-item, .contact-item');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-
-    // Plynulé scrollování pro iOS Safari
-    if (CSS.supports('scroll-behavior', 'smooth')) {
-        // Prohlížeč podporuje scroll-behavior: smooth
-    } else {
-        // Fallback pro starší prohlížeče
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const targetPosition = target.offsetTop - 80; // 80px pro výšku navigace
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    }
-
-    // Lazy loading pro iframe mapy
-    const mapIframe = document.querySelector('iframe');
-    if (mapIframe) {
-        const mapObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Mapa se zobrazí, když se dostane do viewport
-                    entry.target.style.opacity = '1';
-                    mapObserver.unobserve(entry.target);
-                }
-            });
-        });
-
-        mapIframe.style.opacity = '0.5';
-        mapIframe.style.transition = 'opacity 0.5s ease';
-        mapObserver.observe(mapIframe);
-    }
-
-    // Validace formuláře v reálném čase
-    const formInputs = document.querySelectorAll('#orderForm input, #orderForm select, #orderForm textarea');
-    formInputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            validateField(this);
-        });
-
-        input.addEventListener('input', function() {
-            // Odstranění chybového stylu při psaní
-            this.classList.remove('error');
-        });
-    });
-
-    function validateField(field) {
-        const value = field.value.trim();
-        let isValid = true;
-
-        // Kontrola povinných polí
-        if (field.hasAttribute('required') && !value) {
-            isValid = false;
-        }
-
-        // Kontrola e-mailu
-        if (field.type === 'email' && value) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                isValid = false;
-            }
-        }
-
-        // Kontrola telefonu
-        if (field.type === 'tel' && value) {
-            const phoneRegex = /^(\+420\s?)?[0-9]{3}\s?[0-9]{3}\s?[0-9]{3}$/;
-            if (!phoneRegex.test(value.replace(/\s/g, ''))) {
-                isValid = false;
-            }
-        }
-
-        // Přidání/odstranění třídy error
-        if (!isValid) {
-            field.classList.add('error');
-        } else {
-            field.classList.remove('error');
-        }
-
-        return isValid;
-    }
-
-    // Přidání stylů pro chybové stavy
-    if (!document.querySelector('#validation-styles')) {
-        const validationStyles = document.createElement('style');
-        validationStyles.id = 'validation-styles';
-        validationStyles.textContent = `
-            .form-group input.error,
-            .form-group select.error,
-            .form-group textarea.error {
-                border-color: #dc3545;
-                box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
-            }
-        `;
-        document.head.appendChild(validationStyles);
-    }
+    window.addEventListener('scroll', checkVisibility);
+    
+    // Inicializace při načtení
+    checkVisibility();
 });
 
-// Funkce pro kopírování kontaktních údajů
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
-        showMessage('Zkopírováno do schránky!', 'success');
-    }, function() {
-        // Fallback pro starší prohlížeče
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        showMessage('Zkopírováno do schránky!', 'success');
-    });
-}
 
-// Přidání funkcionality pro kopírování při kliknutí na kontaktní údaje
-document.addEventListener('DOMContentLoaded', function() {
-    const phoneLink = document.querySelector('a[href^="tel:"]');
-    const emailLink = document.querySelector('a[href^="mailto:"]');
-
-    if (phoneLink) {
-        phoneLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const phoneNumber = this.textContent;
-            copyToClipboard(phoneNumber);
-        });
-    }
-
-    if (emailLink) {
-        emailLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const email = this.textContent;
-            copyToClipboard(email);
-        });
-    }
-});
