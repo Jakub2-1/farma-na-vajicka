@@ -6,13 +6,18 @@
 }
 
 :root {
-    --white: #ffffff;
-    --beige: #f5f5dc;
-    --light-green: #a3be8c;
-    --dark-green: #2f4f4f;
+    --dark-bg: #1a1a1a;
+    --medium-gray: #333333;
+    --light-gray: #555555;
+    --lighter-gray: #777777;
+    --text-white: #e5e5e5;
     --gold: #c5a880;
-    --shadow: rgba(47, 79, 79, 0.1);
-    --shadow-hover: rgba(47, 79, 79, 0.2);
+    --gold-dark: #b8976b;
+    --card-bg: #2a2a2a;
+    --card-hover: #3a3a3a;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.5);
+    --border-color: #404040;
 }
 
 html {
@@ -22,8 +27,8 @@ html {
 
 body {
     font-family: 'Open Sans', sans-serif;
-    color: var(--dark-green);
-    background-color: var(--white);
+    color: var(--text-white);
+    background-color: var(--dark-bg);
     line-height: 1.6;
 }
 
@@ -42,12 +47,12 @@ h1 {
 
 h2 {
     font-size: 2.5rem;
-    color: var(--dark-green);
+    color: var(--text-white);
 }
 
 h3 {
     font-size: 1.5rem;
-    color: var(--dark-green);
+    color: var(--text-white);
 }
 
 p {
@@ -80,7 +85,7 @@ p {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(26, 26, 26, 0.95);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 1000;
@@ -88,6 +93,7 @@ p {
     box-shadow: 0 2px 20px var(--shadow);
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .nav-container {
@@ -100,7 +106,7 @@ p {
 }
 
 .nav-logo h2 {
-    color: var(--dark-green);
+    color: var(--gold);
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     margin: 0;
@@ -114,7 +120,7 @@ p {
 
 .nav-link {
     text-decoration: none;
-    color: var(--dark-green);
+    color: var(--text-white);
     font-weight: 400;
     transition: all 0.3s ease;
     position: relative;
@@ -150,14 +156,14 @@ p {
 .hamburger span {
     width: 25px;
     height: 3px;
-    background: var(--dark-green);
+    background: var(--text-white);
     transition: all 0.3s ease;
 }
 
 /* Hero sekce */
 .hero {
     height: 100vh;
-    background: linear-gradient(135deg, var(--beige) 0%, var(--light-green) 100%);
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--medium-gray) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -173,7 +179,7 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(197,168,128,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(197,168,128,0.08)"/><circle cx="40" cy="80" r="1.5" fill="rgba(197,168,128,0.05)"/></svg>');
     opacity: 0.3;
 }
 
@@ -184,14 +190,14 @@ p {
 }
 
 .hero-title {
-    color: var(--dark-green);
+    color: var(--text-white);
     margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .hero-subtitle {
     font-size: 1.4rem;
-    color: var(--dark-green);
+    color: var(--lighter-gray);
     margin-bottom: 2.5rem;
     font-weight: 300;
 }
@@ -201,7 +207,7 @@ p {
     display: inline-block;
     padding: 1rem 2.5rem;
     background: var(--gold);
-    color: var(--white);
+    color: var(--dark-bg);
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
@@ -218,13 +224,13 @@ p {
     transform: translateY(-3px) scale(1.05);
     -webkit-transform: translateY(-3px) scale(1.05);
     box-shadow: 0 12px 35px rgba(197, 168, 128, 0.4);
-    background: #b8976b;
+    background: var(--gold-dark);
 }
 
 /* Sekce výhod */
 .benefits {
     padding: 5rem 0;
-    background: var(--white);
+    background: var(--dark-bg);
 }
 
 .benefits-grid {
@@ -237,16 +243,18 @@ p {
 .benefit-item {
     text-align: center;
     padding: 2.5rem 2rem;
-    background: var(--beige);
+    background: var(--card-bg);
     border-radius: 20px;
     box-shadow: 0 10px 30px var(--shadow);
     transition: all 0.4s ease;
+    border: 1px solid var(--border-color);
 }
 
 .benefit-item:hover {
     transform: translateY(-10px);
     -webkit-transform: translateY(-10px);
     box-shadow: 0 20px 40px var(--shadow-hover);
+    background: var(--card-hover);
 }
 
 .benefit-icon {
@@ -255,12 +263,12 @@ p {
 }
 
 .benefit-item h3 {
-    color: var(--dark-green);
+    color: var(--gold);
     margin-bottom: 1rem;
 }
 
 .benefit-item p {
-    color: var(--dark-green);
+    color: var(--lighter-gray);
     font-size: 1rem;
 }
 
@@ -293,7 +301,7 @@ section {
 
 /* O nás sekce */
 .about {
-    background: var(--beige);
+    background: var(--medium-gray);
 }
 
 .about-text {
@@ -305,12 +313,12 @@ section {
 .about-text p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    color: var(--dark-green);
+    color: var(--text-white);
 }
 
 /* Slepice sekce */
 .hens {
-    background: var(--white);
+    background: var(--dark-bg);
 }
 
 .hens-content {
@@ -322,6 +330,7 @@ section {
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 3rem;
+    color: var(--text-white);
 }
 
 .breed-list {
@@ -332,16 +341,18 @@ section {
 }
 
 .breed-item {
-    background: var(--beige);
+    background: var(--card-bg);
     padding: 2.5rem 2rem;
     border-radius: 15px;
     box-shadow: 0 8px 25px var(--shadow);
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .breed-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px var(--shadow-hover);
+    background: var(--card-hover);
 }
 
 .breed-item h4 {
@@ -350,14 +361,18 @@ section {
     margin-bottom: 1rem;
 }
 
+.breed-item p {
+    color: var(--lighter-gray);
+}
+
 /* Vejce sekce */
 .eggs {
-    background: var(--light-green);
-    color: var(--white);
+    background: var(--medium-gray);
+    color: var(--text-white);
 }
 
 .eggs .section-header h2 {
-    color: var(--white);
+    color: var(--text-white);
 }
 
 .eggs-info {
@@ -369,19 +384,21 @@ section {
 .eggs-info p {
     font-size: 1.2rem;
     margin-bottom: 3rem;
+    color: var(--text-white);
 }
 
 .price-section {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(42, 42, 42, 0.8);
     padding: 3rem 2rem;
     border-radius: 20px;
     margin: 3rem 0;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
 }
 
 .price-section h3 {
-    color: var(--white);
+    color: var(--text-white);
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2rem;
@@ -394,17 +411,19 @@ section {
 }
 
 .price-item {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(58, 58, 58, 0.6);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .price-item:hover {
     transform: scale(1.05);
     -webkit-transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(58, 58, 58, 0.8);
+    border-color: var(--gold);
 }
 
 .price-quantity {
@@ -434,7 +453,7 @@ section {
 }
 
 .quality-info h3 {
-    color: var(--white);
+    color: var(--text-white);
     margin-bottom: 1.5rem;
 }
 
@@ -447,6 +466,7 @@ section {
     padding: 0.5rem 0;
     padding-left: 1.5rem;
     position: relative;
+    color: var(--lighter-gray);
 }
 
 .quality-info li::before {
@@ -459,7 +479,7 @@ section {
 
 /* Objednávky sekce */
 .orders {
-    background: var(--white);
+    background: var(--dark-bg);
 }
 
 .order-form-container {
@@ -468,10 +488,11 @@ section {
 }
 
 .order-form {
-    background: var(--beige);
+    background: var(--card-bg);
     padding: 3rem;
     border-radius: 20px;
     box-shadow: 0 15px 40px var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .form-group {
@@ -481,7 +502,7 @@ section {
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--dark-green);
+    color: var(--text-white);
     font-weight: 600;
 }
 
@@ -490,11 +511,12 @@ section {
 .form-group textarea {
     width: 100%;
     padding: 1rem;
-    border: 2px solid transparent;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
     font-size: 1rem;
     font-family: inherit;
-    background: var(--white);
+    background: var(--dark-bg);
+    color: var(--text-white);
     transition: all 0.3s ease;
 }
 
@@ -513,7 +535,7 @@ section {
 
 /* Kontakt sekce */
 .contact {
-    background: var(--beige);
+    background: var(--medium-gray);
 }
 
 .contact-content {
@@ -536,10 +558,11 @@ section {
 
 .contact-item p {
     margin: 0;
+    color: var(--text-white);
 }
 
 .contact-item a {
-    color: var(--dark-green);
+    color: var(--lighter-gray);
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -555,15 +578,15 @@ section {
 
 .social-links a {
     padding: 0.5rem 1rem;
-    background: var(--light-green);
-    color: var(--white);
+    background: var(--gold);
+    color: var(--dark-bg);
     text-decoration: none;
     border-radius: 25px;
     transition: all 0.3s ease;
 }
 
 .social-links a:hover {
-    background: var(--gold);
+    background: var(--gold-dark);
     transform: translateY(-2px);
 }
 
@@ -581,10 +604,11 @@ section {
 
 /* Patička */
 .footer {
-    background: var(--dark-green);
-    color: var(--white);
+    background: var(--dark-bg);
+    color: var(--lighter-gray);
     text-align: center;
     padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
 }
 
 .footer p {
@@ -594,8 +618,8 @@ section {
 
 /* Zpráva o úspěchu */
 .success-message {
-    background: var(--light-green);
-    color: var(--white);
+    background: var(--gold);
+    color: var(--dark-bg);
     padding: 1rem 2rem;
     border-radius: 10px;
     text-align: center;
@@ -603,6 +627,7 @@ section {
     opacity: 0;
     transform: translateY(-20px);
     transition: all 0.5s ease;
+    font-weight: 600;
 }
 
 .success-message.show {
@@ -618,7 +643,7 @@ section {
         left: -100%;
         width: 100%;
         height: calc(100vh - 80px);
-        background: rgba(255, 255, 255, 0.98);
+        background: rgba(26, 26, 26, 0.98);
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         display: flex;
