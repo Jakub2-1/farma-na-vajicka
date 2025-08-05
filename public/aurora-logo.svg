@@ -1,46 +1,58 @@
 <svg width="200" height="140" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Golden gradient for metallic effect -->
-    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Golden gradient for egg fill -->
+    <radialGradient id="eggGradient" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="80%" style="stop-color:#FF8C00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DAA520;stop-opacity:0.9" />
+    </radialGradient>
+    
+    <!-- Golden gradient for text -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
       <stop offset="30%" style="stop-color:#FFA500;stop-opacity:1" />
       <stop offset="70%" style="stop-color:#FFD700;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#FFEF94;stop-opacity:1" />
     </linearGradient>
     
-    <!-- Glow effect -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <!-- Soft glow effect for rays -->
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
       <feMerge> 
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
+    
+    <!-- Golden ray gradient -->
+    <radialGradient id="rayGradient" cx="50%" cy="100%" r="50%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.1" />
+    </radialGradient>
   </defs>
   
-  <!-- Thin golden rays from top of egg (7 rays) -->
-  <g transform="translate(100, 15)">
+  <!-- Soft diffused rays around the egg -->
+  <g transform="translate(100, 30)">
     <!-- Center ray -->
-    <line x1="0" y1="-10" x2="0" y2="0" stroke="#FFD700" stroke-width="1.5" opacity="0.9"/>
+    <ellipse cx="0" cy="-15" rx="2" ry="12" fill="url(#rayGradient)" filter="url(#softGlow)" opacity="0.8"/>
     <!-- Left rays -->
-    <line x1="-8" y1="-8" x2="-4" y2="2" stroke="#FFD700" stroke-width="1" opacity="0.8"/>
-    <line x1="-15" y1="-5" x2="-8" y2="4" stroke="#FFD700" stroke-width="1" opacity="0.7"/>
-    <line x1="-20" y1="0" x2="-12" y2="6" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
+    <ellipse cx="-8" cy="-12" rx="1.5" ry="10" fill="url(#rayGradient)" filter="url(#softGlow)" opacity="0.7" transform="rotate(-15 -8 -12)"/>
+    <ellipse cx="-15" cy="-8" rx="1.2" ry="8" fill="url(#rayGradient)" filter="url(#softGlow)" opacity="0.6" transform="rotate(-25 -15 -8)"/>
+    <ellipse cx="-20" cy="-2" rx="1" ry="6" fill="url(#rayGradient)" filter="url(#softGlow)" opacity="0.5" transform="rotate(-35 -20 -2)"/>
     <!-- Right rays -->
-    <line x1="8" y1="-8" x2="4" y2="2" stroke="#FFD700" stroke-width="1" opacity="0.8"/>
-    <line x1="15" y1="-5" x2="8" y2="4" stroke="#FFD700" stroke-width="1" opacity="0.7"/>
-    <line x1="20" y1="0" x2="12" y2="6" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
+    <ellipse cx="8" cy="-12" rx="1.5" ry="10" fill="url(#rayGradient)" filter="url(#softGlow)" opacity="0.7" transform="rotate(15 8 -12)"/>
+    <ellipse cx="15" cy="-8" rx="1.2" ry="8" fill="url(#rayGradient)" filter="url(#softGlow)" opacity="0.6" transform="rotate(25 15 -8)"/>
+    <ellipse cx="20" cy="-2" rx="1" ry="6" fill="url(#rayGradient)" filter="url(#softGlow)" opacity="0.5" transform="rotate(35 20 -2)"/>
   </g>
   
-  <!-- Golden egg outline -->
-  <ellipse cx="100" cy="30" rx="18" ry="25" fill="none" stroke="url(#goldGradient)" stroke-width="2.5" filter="url(#glow)"/>
+  <!-- Stylized filled egg -->
+  <ellipse cx="100" cy="30" rx="18" ry="25" fill="url(#eggGradient)" filter="url(#softGlow)"/>
   
-  <!-- AURORA text in elegant serif style -->
-  <text x="100" y="80" text-anchor="middle" font-family="serif" font-size="24" font-weight="bold" 
-        fill="url(#goldGradient)" filter="url(#glow)" letter-spacing="2px">
+  <!-- AURORA text with golden gradient -->
+  <text x="100" y="85" text-anchor="middle" font-family="serif" font-size="26" font-weight="bold" 
+        fill="url(#textGradient)" letter-spacing="2px">
     AURORA
   </text>
-  
-  <!-- Thin golden line below text -->
-  <line x1="60" y1="100" x2="140" y2="100" stroke="url(#goldGradient)" stroke-width="1.5" opacity="0.8" filter="url(#glow)"/>
 </svg>
