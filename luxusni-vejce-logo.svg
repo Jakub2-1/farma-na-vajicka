@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="260" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .egg-glow {
+      filter: url(#glowEffect);
+      animation: breathe 2.5s infinite ease-in-out;
+    }
+    
+    @keyframes breathe {
+      0% { 
+        filter: url(#glowEffect);
+        transform: scale(1);
+      }
+      50% { 
+        filter: url(#glowEffectStrong);
+        transform: scale(1.02);
+      }
+      100% { 
+        filter: url(#glowEffect);
+        transform: scale(1);
+      }
+    }
+    
+    /* Responsive design for mobile */
+    @media (max-width: 768px) {
+      .egg-glow {
+        animation-duration: 3s;
+      }
+    }
+  </style>
+  
+  <defs>
+    <!-- Gradient from light gold to darker gold -->
+    <radialGradient id="eggGradient" cx="50%" cy="40%" r="65%" fx="45%" fy="35%">
+      <stop offset="0%" stop-color="#fff9d6" />
+      <stop offset="30%" stop-color="#fffae0" />
+      <stop offset="70%" stop-color="#ffe066" />
+      <stop offset="100%" stop-color="#FFD700" />
+    </radialGradient>
+    
+    <!-- Subtle glow effect -->
+    <filter id="glowEffect" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#FFD700" flood-opacity="0.3"/>
+    </filter>
+    
+    <!-- Stronger glow effect for breathing animation -->
+    <filter id="glowEffectStrong" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+      <feDropShadow dx="0" dy="0" stdDeviation="15" flood-color="#FFD700" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  
+  <!-- Main egg shape - slightly elongated -->
+  <g class="egg-glow" transform-origin="100 130">
+    <ellipse 
+      cx="100" 
+      cy="130" 
+      rx="65" 
+      ry="95" 
+      fill="url(#eggGradient)"
+      stroke="#FFD700"
+      stroke-width="1"
+      opacity="0.95"
+    />
+    
+    <!-- Subtle highlight for more realistic appearance -->
+    <ellipse 
+      cx="85" 
+      cy="100" 
+      rx="15" 
+      ry="25" 
+      fill="#ffffff"
+      opacity="0.25"
+    />
+  </g>
+</svg>
