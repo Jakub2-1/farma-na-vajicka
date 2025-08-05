@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="600" height="500" viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="300" height="350" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
   <style>
     .glow {
       filter: url(#glowFilter1);
@@ -7,7 +7,7 @@
     }
     .rays {
       animation: rayPulse 3s infinite ease-in-out;
-      transform-origin: center bottom;
+      transform-origin: center;
     }
     @keyframes glow {
       0%   { filter: url(#glowFilter1); }
@@ -15,51 +15,61 @@
       100% { filter: url(#glowFilter1); }
     }
     @keyframes rayPulse {
-      0%   { transform: scaleY(1); }
-      50%  { transform: scaleY(1.2); }
-      100% { transform: scaleY(1); }
+      0%   { transform: scale(1); opacity: 0.8; }
+      50%  { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
     }
   </style>
   <defs>
-    <radialGradient id="goldGradient" cx="50%" cy="50%" r="60%" fx="50%" fy="50%">
+    <radialGradient id="goldGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
       <stop offset="0%" stop-color="#FFD700" />
-      <stop offset="70%" stop-color="#FFD700" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#FFD700" stop-opacity="0.8"/>
       <stop offset="100%" stop-color="#B8860B" stop-opacity="0.9"/>
     </radialGradient>
     <!-- Glow filter 1: subtle -->
-    <filter id="glowFilter1" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#FFD700" flood-opacity="0.25"/>
+    <filter id="glowFilter1" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#FFD700" flood-opacity="0.4"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="25" flood-color="#FFD700" flood-opacity="0.2"/>
     </filter>
     <!-- Glow filter 2: stronger -->
-    <filter id="glowFilter2" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="0" stdDeviation="18" flood-color="#FFD700" flood-opacity="0.45"/>
+    <filter id="glowFilter2" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="0" stdDeviation="18" flood-color="#FFD700" flood-opacity="0.6"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="35" flood-color="#FFD700" flood-opacity="0.3"/>
     </filter>
   </defs>
-  <rect width="600" height="500" fill="black"/>
-  <!-- Egg Outline with glow, significantly larger and perfectly centered -->
+  
+  <!-- Large egg outline perfectly centered -->
   <g class="glow">
-    <!-- Veel większe vajíčko - increased size by ~60% and repositioned for perfect centering -->
-    <ellipse cx="300" cy="120" rx="150" ry="220" stroke="url(#goldGradient)" stroke-width="4" fill="none"/>
-    <!-- Exactly 7 rays positioned only above the egg -->
+    <!-- Main egg shape - larger and centered -->
+    <ellipse cx="150" cy="175" rx="100" ry="140" stroke="url(#goldGradient)" stroke-width="3" fill="none"/>
+    
+    <!-- Radiant rays around the egg creating a halo effect -->
     <g class="rays">
-      <!-- Ray 1 - center -->
-      <line x1="300" y1="-130" x2="300" y2="-50" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
-      <!-- Ray 2 - slight left -->
-      <line x1="270" y1="-120" x2="270" y2="-60" stroke="#FFD700" stroke-width="3.5" stroke-linecap="round"/>
-      <!-- Ray 3 - slight right -->
-      <line x1="330" y1="-120" x2="330" y2="-60" stroke="#FFD700" stroke-width="3.5" stroke-linecap="round"/>
-      <!-- Ray 4 - more left -->
-      <line x1="240" y1="-110" x2="240" y2="-70" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-      <!-- Ray 5 - more right -->
-      <line x1="360" y1="-110" x2="360" y2="-70" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-      <!-- Ray 6 - far left -->
-      <line x1="210" y1="-100" x2="210" y2="-80" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- Ray 7 - far right -->
-      <line x1="390" y1="-100" x2="390" y2="-80" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Top rays -->
+      <line x1="150" y1="20" x2="150" y2="60" stroke="#FFD700" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+      <line x1="120" y1="30" x2="120" y2="65" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+      <line x1="180" y1="30" x2="180" y2="65" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+      <line x1="90" y1="45" x2="90" y2="75" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+      <line x1="210" y1="45" x2="210" y2="75" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+      
+      <!-- Side rays -->
+      <line x1="25" y1="140" x2="60" y2="140" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+      <line x1="240" y1="140" x2="275" y2="140" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+      <line x1="30" y1="175" x2="65" y2="175" stroke="#FFD700" stroke-width="3.5" stroke-linecap="round" opacity="0.8"/>
+      <line x1="235" y1="175" x2="270" y2="175" stroke="#FFD700" stroke-width="3.5" stroke-linecap="round" opacity="0.8"/>
+      <line x1="35" y1="210" x2="70" y2="210" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+      <line x1="230" y1="210" x2="265" y2="210" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+      
+      <!-- Bottom rays -->
+      <line x1="150" y1="290" x2="150" y2="330" stroke="#FFD700" stroke-width="3.5" stroke-linecap="round" opacity="0.8"/>
+      <line x1="120" y1="285" x2="120" y2="320" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+      <line x1="180" y1="285" x2="180" y2="320" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+      
+      <!-- Diagonal rays for full halo effect -->
+      <line x1="65" y1="75" x2="85" y2="95" stroke="#FFD700" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+      <line x1="235" y1="75" x2="215" y2="95" stroke="#FFD700" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+      <line x1="65" y1="275" x2="85" y2="255" stroke="#FFD700" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+      <line x1="235" y1="275" x2="215" y2="255" stroke="#FFD700" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
     </g>
   </g>
-  <!-- Text Aurora positioned properly below the larger egg -->
-  <text x="300" y="380" text-anchor="middle" font-family="'Cinzel', Trajan, serif" font-size="72" fill="url(#goldGradient)" font-weight="bold" letter-spacing="7">AURORA</text>
-  <!-- Gold underline adjusted for new text position -->
-  <rect x="170" y="400" width="260" height="3" rx="1.5" fill="url(#goldGradient)" />
 </svg>
