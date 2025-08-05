@@ -29,18 +29,23 @@
   <rect width="600" height="400" fill="black"/>
   <!-- Egg Outline with glow, now larger and higher -->
   <g class="glow">
-    <!-- Zvětšené vajíčko -->
-    <ellipse cx="300" cy="100" rx="75" ry="110" stroke="url(#goldGradient)" stroke-width="4" fill="none"/>
+    <!-- Zvětšené vajíčko - increased size by ~25% -->
+    <ellipse cx="300" cy="100" rx="95" ry="140" stroke="url(#goldGradient)" stroke-width="4" fill="none"/>
     <!-- Light rays - větší mezera, delší paprsky -->
     <g>
-      <!-- Mezera od obrysu (začíná cca 25px nad obrysem) -->
-      <line x1="300" y1="-35" x2="300" y2="5" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-      <line x1="300" y1="-35" x2="340" y2="25" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-      <line x1="300" y1="-35" x2="260" y2="25" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-      <line x1="300" y1="-35" x2="370" y2="60" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="300" y1="-35" x2="230" y2="60" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="300" y1="-35" x2="325" y2="10" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="300" y1="-35" x2="275" y2="10" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Mezera od obrysu (začíná cca 45px nad obrysem) - větší mezera a delší paprsky -->
+      <line x1="300" y1="-85" x2="300" y2="-25" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="350" y2="-10" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="250" y2="-10" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="385" y2="20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="215" y2="20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="330" y2="-20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="270" y2="-20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Dodatečné paprsky pro lepší efekt záře -->
+      <line x1="300" y1="-85" x2="400" y2="50" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="200" y2="50" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="365" y2="-5" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+      <line x1="300" y1="-85" x2="235" y2="-5" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
     </g>
   </g>
   <!-- Text Aurora -->
