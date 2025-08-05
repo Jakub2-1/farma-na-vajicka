@@ -118,6 +118,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Animace */
+@keyframes glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 16px gold);
+  }
+  50% {
+    filter: drop-shadow(0 0 16px gold) drop-shadow(0 0 32px gold) drop-shadow(0 0 48px rgba(255, 215, 0, 0.5));
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -219,6 +228,21 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 3;
   text-align: center;
   padding: 2rem;
+}
+
+/* Aurora Logo */
+.logo {
+  width: clamp(120px, 15vw, 200px);
+  height: auto;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 16px gold);
+  animation: glow 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 16px gold) drop-shadow(0 0 32px gold) drop-shadow(0 0 48px rgba(255, 215, 0, 0.7));
 }
 
 /* Částice */
@@ -538,6 +562,13 @@ h1, h2, h3, h4, h5, h6 {
     padding: 3rem 0;
   }
   
+  .logo {
+    width: clamp(80px, 12vw, 120px);
+    margin-bottom: 1.5rem;
+    /* Keep the glow effect on mobile */
+    filter: drop-shadow(0 0 6px gold) drop-shadow(0 0 12px gold);
+  }
+  
   .form-group {
     flex-direction: column;
   }
@@ -561,6 +592,13 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 480px) {
   .intro-content {
     padding: 1rem;
+  }
+  
+  .logo {
+    width: clamp(60px, 10vw, 100px);
+    margin-bottom: 1rem;
+    /* Slightly reduced glow for very small screens */
+    filter: drop-shadow(0 0 4px gold) drop-shadow(0 0 8px gold);
   }
   
   .cta-button, .submit-button {
