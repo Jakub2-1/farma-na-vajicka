@@ -37,6 +37,7 @@ const App: React.FC = () => {
           style={{ transform: `translateY(${scrollY * 0.5}px)` }}
         ></div>
         <div className="intro-content">
+          <img src="/aurora-logo.svg" alt="Aurora Logo" className="logo" />
           <h1 className="main-title glow-text">Aurora</h1>
           <p className="subtitle fade-in-up">Již brzy… chuť nového rána</p>
           <button 
