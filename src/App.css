@@ -118,12 +118,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Animace */
-@keyframes glow {
+@keyframes logoGlow {
   0%, 100% {
-    filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 16px gold);
+    filter: drop-shadow(0 0 8px #FFD700) drop-shadow(0 0 16px #FFD700);
   }
   50% {
-    filter: drop-shadow(0 0 16px gold) drop-shadow(0 0 32px gold) drop-shadow(0 0 48px rgba(255, 215, 0, 0.5));
+    filter: drop-shadow(0 0 16px #FFD700) drop-shadow(0 0 32px #FFD700) drop-shadow(0 0 48px rgba(255, 215, 0, 0.6));
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px #FFD700, 0 0 40px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 30px #FFD700, 0 0 60px rgba(255, 215, 0, 0.7);
   }
 }
 
@@ -135,15 +144,6 @@ h1, h2, h3, h4, h5, h6 {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    text-shadow: 0 0 20px var(--shadow-gold), 0 0 40px var(--shadow-gold);
-  }
-  50% {
-    text-shadow: 0 0 30px var(--shadow-gold), 0 0 60px var(--shadow-gold);
   }
 }
 
@@ -170,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glow-text {
-  animation: glow 3s ease-in-out infinite;
+  animation: textGlow 2.5s ease-in-out infinite;
 }
 
 /* Kontejnery */
@@ -235,14 +235,14 @@ h1, h2, h3, h4, h5, h6 {
   width: clamp(120px, 15vw, 200px);
   height: auto;
   margin-bottom: 2rem;
-  filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 16px gold);
-  animation: glow 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px #FFD700) drop-shadow(0 0 16px #FFD700);
+  animation: logoGlow 2.5s ease-in-out infinite;
   transition: all 0.3s ease;
 }
 
 .logo:hover {
   transform: scale(1.1);
-  filter: drop-shadow(0 0 16px gold) drop-shadow(0 0 32px gold) drop-shadow(0 0 48px rgba(255, 215, 0, 0.7));
+  filter: drop-shadow(0 0 16px #FFD700) drop-shadow(0 0 32px #FFD700) drop-shadow(0 0 48px rgba(255, 215, 0, 0.8));
 }
 
 /* Částice */
@@ -566,7 +566,7 @@ h1, h2, h3, h4, h5, h6 {
     width: clamp(80px, 12vw, 120px);
     margin-bottom: 1.5rem;
     /* Keep the glow effect on mobile */
-    filter: drop-shadow(0 0 6px gold) drop-shadow(0 0 12px gold);
+    filter: drop-shadow(0 0 6px #FFD700) drop-shadow(0 0 12px #FFD700);
   }
   
   .form-group {
@@ -598,7 +598,7 @@ h1, h2, h3, h4, h5, h6 {
     width: clamp(60px, 10vw, 100px);
     margin-bottom: 1rem;
     /* Slightly reduced glow for very small screens */
-    filter: drop-shadow(0 0 4px gold) drop-shadow(0 0 8px gold);
+    filter: drop-shadow(0 0 4px #FFD700) drop-shadow(0 0 8px #FFD700);
   }
   
   .cta-button, .submit-button {

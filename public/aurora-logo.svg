@@ -1,35 +1,46 @@
-<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Aurora sunrise design -->
+<svg width="200" height="140" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="sunrise" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#f4d03f;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#fff8dc;stop-opacity:1" />
+    <!-- Golden gradient for metallic effect -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFEF94;stop-opacity:1" />
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#f4d03f;stop-opacity:0.3" />
-      <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0" />
-    </radialGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
   
-  <!-- Background glow -->
-  <circle cx="100" cy="60" r="55" fill="url(#glow)" />
-  
-  <!-- Sun rays -->
-  <g transform="translate(100,60)">
-    <path d="M 0,-45 L 2,-35 L -2,-35 Z" fill="url(#sunrise)" opacity="0.8"/>
-    <path d="M 31.8,-31.8 L 33.8,-29.8 L 29.8,-27.8 Z" fill="url(#sunrise)" opacity="0.7" transform="rotate(45)"/>
-    <path d="M 45,0 L 35,2 L 35,-2 Z" fill="url(#sunrise)" opacity="0.8" transform="rotate(90)"/>
-    <path d="M 31.8,31.8 L 29.8,33.8 L 27.8,29.8 Z" fill="url(#sunrise)" opacity="0.7" transform="rotate(135)"/>
-    <path d="M 0,45 L -2,35 L 2,35 Z" fill="url(#sunrise)" opacity="0.6" transform="rotate(180)"/>
-    <path d="M -31.8,31.8 L -33.8,29.8 L -29.8,27.8 Z" fill="url(#sunrise)" opacity="0.7" transform="rotate(225)"/>
-    <path d="M -45,0 L -35,-2 L -35,2 Z" fill="url(#sunrise)" opacity="0.8" transform="rotate(270)"/>
-    <path d="M -31.8,-31.8 L -29.8,-33.8 L -27.8,-29.8 Z" fill="url(#sunrise)" opacity="0.7" transform="rotate(315)"/>
+  <!-- Thin golden rays from top of egg (7 rays) -->
+  <g transform="translate(100, 15)">
+    <!-- Center ray -->
+    <line x1="0" y1="-10" x2="0" y2="0" stroke="#FFD700" stroke-width="1.5" opacity="0.9"/>
+    <!-- Left rays -->
+    <line x1="-8" y1="-8" x2="-4" y2="2" stroke="#FFD700" stroke-width="1" opacity="0.8"/>
+    <line x1="-15" y1="-5" x2="-8" y2="4" stroke="#FFD700" stroke-width="1" opacity="0.7"/>
+    <line x1="-20" y1="0" x2="-12" y2="6" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
+    <!-- Right rays -->
+    <line x1="8" y1="-8" x2="4" y2="2" stroke="#FFD700" stroke-width="1" opacity="0.8"/>
+    <line x1="15" y1="-5" x2="8" y2="4" stroke="#FFD700" stroke-width="1" opacity="0.7"/>
+    <line x1="20" y1="0" x2="12" y2="6" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
   </g>
   
-  <!-- Central sun -->
-  <circle cx="100" cy="60" r="25" fill="url(#sunrise)" />
+  <!-- Golden egg outline -->
+  <ellipse cx="100" cy="30" rx="18" ry="25" fill="none" stroke="url(#goldGradient)" stroke-width="2.5" filter="url(#glow)"/>
   
-  <!-- Inner highlight -->
-  <circle cx="95" cy="55" r="8" fill="#fff8dc" opacity="0.6" />
+  <!-- AURORA text in elegant serif style -->
+  <text x="100" y="80" text-anchor="middle" font-family="serif" font-size="24" font-weight="bold" 
+        fill="url(#goldGradient)" filter="url(#glow)" letter-spacing="2px">
+    AURORA
+  </text>
+  
+  <!-- Thin golden line below text -->
+  <line x1="60" y1="100" x2="140" y2="100" stroke="url(#goldGradient)" stroke-width="1.5" opacity="0.8" filter="url(#glow)"/>
 </svg>
